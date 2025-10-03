@@ -50,7 +50,7 @@ public class Movement2D : MonoBehaviour
     private void FixedUpdate()
     {
         // You don't need to multiply the movement by Time.deltaTime because the physics calculations are already frame-rate independent
-        rb.velocity = new Vector2(movement * moveSpeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(movement * moveSpeed, rb.linearVelocity.y);
 
         // Handle the jump request
         if (jumpRequested)
@@ -91,8 +91,14 @@ public class Movement2D : MonoBehaviour
 
         // If the player is grounded and space is pressed, set the y velocity of the player to the jumpforce
         Debug.Log("Player Jumped");
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Sets the y velocity of the player to the jumpforce. Preserves the x velocity.
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // Sets the y velocity of the player to the jumpforce. Preserves the x velocity.
 
+    }
+
+    public void Dodger(float boost)
+    {
+        Debug.Log("Dodged");
+        moveSpeed += boost;
     }
     #endregion
 }
